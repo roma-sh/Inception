@@ -17,6 +17,7 @@ up:
 # Build images and run containers
 build:
 	@printf "Assembling the configuration ${name}...\n"
+	@bash srcs/requirements/wordpress/tools/make_dir.sh
 	@docker-compose -f $(COMPOSE_FILE) up -d --build
 
 # rebuild and re-run
@@ -68,3 +69,4 @@ fclean:
 # || means run the left side of the command if the right side failed
 
 .PHONY	: all up build down re clean fclean
+

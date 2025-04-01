@@ -12,7 +12,7 @@ RUN apk update && apk add --no-cache mariadb mariadb-client
 RUN mkdir /var/run/mysqld && \
 	chmod 777 /var/run/mysqld
 
-	COPY ./requirements/mariadb/conf/mariadb.conf /etc/my.cnf.d/mariadb.conf
+COPY ./requirements/mariadb/conf/mariadb.conf /etc/my.cnf.d/mariadb-server.conf
 
 # (run mariadb)explanations down
 RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
