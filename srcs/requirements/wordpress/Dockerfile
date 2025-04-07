@@ -1,47 +1,49 @@
-FROM alpine:3.21
+FROM alpine:3.16
 
-ARG	DB_NAME \
-	DB_USER \
-	DB_PASS
-
-
+# Install required packages for PHP and WordPress in one step to reduce layers and image size
 RUN apk update && apk upgrade && apk add --no-cache \
-	php \
-	php-fpm \
-	php-mysqli \
-	php-json \
-	php-dom \
-	php-exif \
-	php-redis \
-	php-mbstring \
-	php-fileinfo \
-	php-curl \
-	php-xml \
-	php-openssl \
-	php-zip \
+	php8 \
+	mysql-client \
+	php8-fpm \
+	php8-mysqli \
+	php8-json \
+	php8-dom \
+	php8-exif \
+	php8-fileinfo \
+	php8-curl \
+	php8-xml \
+	php8-openssl \
+	php8-zip \
 	wget \
-	unzip
+	unzip \
+	&& rm -rf /var/cache/apk/*
 
-# to see each why we nee all these modules, check out wordpress Documentations:
-	# https://make.wordpress.org/hosting/handbook/server-environment/
+# Create necessary directories for PHP-FPM and WordPress
+RUN mkdir -p /run/php  /var/www/html /var/log/php && sleep 15
 
-COPY ./requirements/wordpress/conf/php.conf /etc/php8/php-fpm.d/www.conf
-# ##########changed########
+# Set working directory to /var/www before downloading WordPress
+WORKDIR /var/www/html
 
-# download wordpress and unzip it along the path /var/www/.
+# Download and install WordPress
+RUN wget http://wordpress.org/latest.tar.gz && \
+	tar xfz latest.tar.gz && \
+	mv wordpress/* . && \
+	rm -rf wordpress latest.tar.gz
 
-WORKDIR /var/www
+# Copy custom PHP-FPM config and set proper permissions
+COPY ./requirements/wordpress/conf/www.conf /etc/php8/php-fpm.d/www.conf
 
-RUN wget https://wordpress.org/latest.zip && \
-	unzip latest.zip && \
-	# mv wordpress/* . && rm -rf wordpress chat
-	cp -rf wordpress/* . && \
-	rm -rf wordpress latest.zip
-
+# Copy wp-config creation script
 COPY ./requirements/wordpress/conf/wp-config-create.sh .
 
-RUN sh wp-config-create.sh && rm wp-config-create.sh && \
-	chmod -R 0777 wp-content/
+# Create wp-config.php and set correct permissions (to www-data)
+RUN chmod +x wp-config-create.sh && \
+	sh wp-config-create.sh && \
+	rm wp-config-create.sh && \
+	chmod -R 0777 wp-content
 
-# CMD ["sh", "-c", "/usr/sbin/php-fpm8 -F"] chat
-CMD ["/usr/sbin/php-fpm83", "-F"]
+# Expose the PHP-FPM port (9000)
+EXPOSE 9000
+
+# Run PHP-FPM
+CMD ["/usr/sbin/php-fpm8", "-F"]

@@ -1,0 +1,23 @@
+[server]
+
+init_file = /etc/mysql/init.sql
+
+[mysqld]
+# Basic configurations
+bind-address = 0.0.0.0
+
+# Paths and directories
+user = root
+pid-file = /run/mysqld/mysqld.pid
+basedir = /usr
+datadir = /var/lib/mysql
+tmpdir = /tmp
+
+# Database settings
+expire_logs_days = 10
+character-set-server = utf8mb4
+collation-server = utf8mb4_general_ci
+
+[embedded]
+
+[mariadb]

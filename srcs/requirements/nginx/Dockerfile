@@ -1,11 +1,16 @@
-FROM alpine:3.21
+FROM debian:bullseye
 
-RUN apk update && apk upgrade && apk add --no-cache nginx openssl
+RUN apt-get update && apt-get install -y \
+	nginx \
+	openssl \
+	&& rm -rf /var/lib/apt/lists/*
 
-COPY tools/entrypoint.sh /entrypoint.sh
+COPY conf/nginx.conf /etc/nginx/nginx.conf
 
-RUN chmod +x /entrypoint.sh
+RUN mkdir -p /etc/nginx/ssl && \
+	openssl req -x509 -nodes -days 365 -newkey rsa:4096 -sha256 \
+	-keyout /etc/nginx/ssl/rshatra.42.fr.key \
+	-out /etc/nginx/ssl/rshatra.42.fr.crt \
+	-subj "/C=MY/ST=EARTH/L=SOMEWHERE/O=42/OU=WHAT/CN=rshatra.42.fr"
 
-EXPOSE 443
-
-ENTRYPOINT ["/entrypoint.sh"]
+CMD ["nginx", "-g", "daemon off;"]

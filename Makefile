@@ -57,7 +57,7 @@ fclean:
 	@echo "  - All unused volumes"
 	@read -p "Are you sure you want to continue? [y/N] " CONFIRM && [ "$$CONFIRM" = "y" ] && \
 	docker stop $$(docker ps -qa) && \
-	docker system prune --all --force --volumes && \
+	docker system prune --all --force && \
 	docker network prune --force && \
 	docker volume prune --force || echo "Operation canceled."
 
