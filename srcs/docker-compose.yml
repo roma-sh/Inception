@@ -56,14 +56,14 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: /home/${USER}/data/wordpress
+      device: /home/rshatra/data/wordpress
 
   db-volume:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: /home/${USER}/data/mariadb
+      device: /home/rshatra/data/mariadb
 
 
 networks:
