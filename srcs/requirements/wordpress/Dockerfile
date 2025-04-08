@@ -1,5 +1,9 @@
 FROM alpine:3.16
 
+ARG DB_NAME DB_ROOT DB_USER DB_PASS DB_HOST \
+	WP_URL WP_TITLE WP_ADMIN_EMAIL WP_ADMIN_USER WP_ADMIN_PASSWORD \
+	WP_USER_EMAIL WP_USER WP_USER_PASSWORD
+
 # Install required packages for PHP and WordPress in one step to reduce layers and image size
 RUN apk update && apk upgrade && apk add --no-cache \
 	php8 \

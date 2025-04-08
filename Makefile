@@ -17,7 +17,6 @@ up:
 # Build images and run containers
 build:
 	@printf "Assembling the configuration ${name}...\n"
-	@bash srcs/requirements/wordpress/tools/make_dir.sh
 	@docker-compose -f $(COMPOSE_FILE) up -d --build
 
 # rebuild and re-run
