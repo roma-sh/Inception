@@ -22,12 +22,12 @@ collation-server = utf8mb4_general_ci
 
 # 1 MariaDB server initialization and overall configuration.
 # 3 This specifies an SQL file (init.sql) that will be executed at the start of the MariaDB server.
-	It could contain commands to set up the database, tables, users, etc., when the server starts.
+# It could contain commands to set up the database, tables, users, etc., when the server starts.
 # 5 the main configuration for the MariaDB server (mysqld is the name of the server daemon)
 # 7 This allows MariaDB to accept connections from any IP address, meaning it will listen on all
-	network interfaces. By default, MariaDB listens on 127.0.0.1 (localhost), but this setting makes
-	it accessible from external machines. This is typically useful for Docker setups or when accessing
-	the database remotely
+# network interfaces. By default, MariaDB listens on 127.0.0.1 (localhost), but this setting makes
+# it accessible from external machines. This is typically useful for Docker setups or when accessing
+# the database remotely
 
 # 10 the default administrative user
 # 11 the location where the MariaDB process ID file will be stored, helps the system manage and track the MariaDB server process
@@ -36,9 +36,9 @@ collation-server = utf8mb4_general_ci
 # 14 It’s used for storing temporary files during query execution and other operations
 
 # 17 how long binary logs are kept before they are automatically deleted,
-	Binary logs store changes to the database for replication and backup purposes
+# Binary logs store changes to the database for replication and backup purposes
 # 18 Sets the default character set for the server to utf8mb4, which is a more comprehensive UTF-8 encoding
-	that supports all Unicode characters (including emojis)
+# that supports all Unicode characters (including emojis)
 # 19 Defines the default collation for the server. Collation determines how strings are compared and sorted.
-	utf8mb4_general_ci is a case-insensitive collation for utf8mb4 character set.
+# utf8mb4_general_ci is a case-insensitive collation for utf8mb4 character set.
 
