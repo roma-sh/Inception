@@ -1,4 +1,4 @@
-![Not_enough](https://github.com/roma-sh/Inception/img/not_enough.png)
+![Not_enough](https://github.com/roma-sh/Inception/blob/master/img/not_enough.png)
 
 ## Table of Contents
 1. [Introduction](#-inception-project--escape-the-dependency-dungeon)
@@ -22,10 +22,10 @@ But wait... there's hope! What if you could ship your project inside a small, se
 ## 📝 Note:
 
 1. **Please add your own values to the `.env` file**
-![Not_enough](https://github.com/roma-sh/Inception/img/env.png)
+![env_note](https://github.com/roma-sh/Inception/blob/master/img/env.png)
 
 2. **You can modify the storage location** by changing the path for volumes in the `docker-compose.yml` file
-![Not_enough](https://github.com/roma-sh/Inception/img/path.png)
+![path_note](https://github.com/roma-sh/Inception/blob/master/img/path.png)
 
 3. you can chnage the Domain by setting it in the env file.
 ---
@@ -45,7 +45,7 @@ make all
 
 Not familiar with Docker, Nginx, WordPress?? No worries:
 
-![Not_enough](https://github.com/roma-sh/Inception/img/docker.png)
+![docker](https://github.com/roma-sh/Inception/blob/master/img/docker.png)
 
 
 ## 🐋 What is Docker?
@@ -105,6 +105,10 @@ In this project:
 ---
 
 ## 📦 Project Overview
+
+Here is the diagram of the expected result:
+
+![Diagram](https://github.com/roma-sh/Inception/blob/master/img/diagram.png)
 
 ### 🎯 Purpose
 
